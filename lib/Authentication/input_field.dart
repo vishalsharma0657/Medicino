@@ -23,11 +23,13 @@ class InputField extends StatelessWidget {
           height: 50.0,
           child: TextFormField(
             obscureText: pswd == true,
-            style: const TextStyle(fontSize: 18, color: Colors.white),
+            style: const TextStyle(
+              fontSize: 18,
+            ),
             decoration: const InputDecoration(
               focusedBorder: OutlineInputBorder(
                 borderSide: BorderSide(
-                  color: Colors.yellow,
+                  color: Colors.blue,
                 ),
               ),
               border: OutlineInputBorder(

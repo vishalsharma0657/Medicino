@@ -11,20 +11,20 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       title: 'Medicino',
       // theme: ThemeData.dark(),
-      theme: ThemeData(
-        textTheme: const TextTheme(
-          bodyText1: TextStyle(),
-          bodyText2: TextStyle(),
-        ).apply(
-          bodyColor: Colors.white,
-          displayColor: Colors.red,
-        ),
-      ),
+      // theme: ThemeData(
+      //   textTheme: const TextTheme(
+      //     bodyText1: TextStyle(),
+      //     bodyText2: TextStyle(),
+      //   ).apply(
+      //     bodyColor: Colors.white,
+      //     displayColor: Colors.red,
+      //   ),
+      // ),
 
-      home: const MyHomePage(),
+      home: MyHomePage(),
     );
   }
 }

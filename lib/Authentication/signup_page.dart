@@ -22,7 +22,7 @@ class SignupPage extends StatelessWidget {
         // ),
         padding: const EdgeInsets.fromLTRB(25.0, 0.0, 25.0, 0),
         // color: const Color.fromRGBO(242, 242, 242, 1),
-        color: Colors.blueGrey,
+        // color: Colors.blueGrey,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
@@ -37,7 +37,7 @@ class SignupPage extends StatelessWidget {
                 Text(
                   'Sign Up',
                   style: TextStyle(
-                      color: Colors.amber,
+                      color: Colors.teal,
                       fontSize: 24.0,
                       fontWeight: FontWeight.bold),
                 ),
@@ -47,7 +47,7 @@ class SignupPage extends StatelessWidget {
                 Icon(
                   Icons.person_pin_sharp,
                   size: 35.0,
-                  color: Colors.yellow,
+                  color: Colors.green,
                 ),
               ],
             ),
@@ -69,7 +69,7 @@ class SignupPage extends StatelessWidget {
                   },
                   child: const Text(
                     'Already a member? Sign in',
-                    style: TextStyle(fontSize: 18.0, color: Colors.yellow),
+                    style: TextStyle(fontSize: 18.0, color: Colors.blue),
                   ),
                 ),
               ],
