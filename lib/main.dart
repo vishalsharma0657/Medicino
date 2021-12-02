@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:medicino/Authentication/sign_in.dart';
+
 
 void main() {
   runApp(const MyApp());
@@ -10,10 +12,20 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       title: 'Medicino',
-      theme: ThemeData.dark(),
-      home: const MyHomePage(),
+      // theme: ThemeData.dark(),
+      // theme: ThemeData(
+      //   textTheme: const TextTheme(
+      //     bodyText1: TextStyle(),
+      //     bodyText2: TextStyle(),
+      //   ).apply(
+      //     bodyColor: Colors.white,
+      //     displayColor: Colors.red,
+      //   ),
+      // ),
+
+      home: MyHomePage(),
     );
   }
 }
@@ -23,24 +35,25 @@ class MyHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('MEDICINO -> MEDICINES FOR ALL.'),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            Image.asset('images/logo.png'),
-            const Text(
-              'Vishal and Deependu are working on this project.',
-              style: TextStyle(
-                fontSize: 16.0,
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
+    return const Signin();
+    // return Scaffold(
+    //   appBar: AppBar(
+    //     title: const Text('MEDICINO -> MEDICINES FOR ALL.'),
+    //   ),
+    //   body: Center(
+    //     child: Column(
+    //       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+    //       children: [
+    //         Image.asset('images/logo.png'),
+    //         const Text(
+    //           'Vishal and Deependu are working on this project.',
+    //           style: TextStyle(
+    //             fontSize: 16.0,
+    //           ),
+    //         ),
+    //       ],
+    //     ),
+    //   ),
+    // );
   }
 }
