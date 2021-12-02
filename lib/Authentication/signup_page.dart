@@ -12,7 +12,6 @@ class SignupPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       // #DFE6ED
-
       body: Container(
         // decoration: const BoxDecoration(
         //   image: DecorationImage(
@@ -26,9 +25,6 @@ class SignupPage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            const SizedBox(
-              height: 20.0,
-            ),
             Row(
               children: const [
                 // SizedBox(
@@ -51,32 +47,41 @@ class SignupPage extends StatelessWidget {
                 ),
               ],
             ),
-            InputField('Name', false),
-            InputField('Email', false),
-            Column(
-              children: [
-                InputField('Password', true),
-                const SizedBox(
-                  height: 15.0,
-                ),
-                TextButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const SigninPage()),
-                    );
-                  },
-                  child: const Text(
-                    'Already a member? Sign in',
-                    style: TextStyle(fontSize: 18.0, color: Colors.blue),
+            Center(
+              child: ListView(
+                reverse: true,
+                shrinkWrap: true,
+                children: [
+                  const Spacer(),
+                  const Spacer(),
+                  InputField('Name', false),
+                  const Spacer(),
+                  InputField('Email', false),
+                  const Spacer(),
+                  InputField('Password', true),
+                  const SizedBox(
+                    height: 15.0,
                   ),
-                ),
-              ],
-            ),
-            Button('Get Started'),
-            const SizedBox(
-              height: 20.0,
+                  TextButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const SigninPage()),
+                      );
+                    },
+                    child: const Text(
+                      'Already a member? Sign in',
+                      style: TextStyle(fontSize: 18.0, color: Colors.blue),
+                    ),
+                  ),
+                  const Spacer(),
+                  Button('Get Started'),
+                  const Spacer(
+                    flex: 2,
+                  ),
+                ].reversed.toList(),
+              ),
             ),
           ],
         ),
