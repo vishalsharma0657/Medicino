@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:medicino/User_Input/input_page.dart';
 
 class Button extends StatelessWidget {
-  // const Button({ Key? key }) : super(key: key);
   String txt;
-  Button(this.txt);
-
+  Button(this.txt, {Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed: () {},
+      onPressed: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const InputPage()),
+        );
+      },
       // style: ElevatedButton.styleFrom(
       //   primary: Colors.teal,
       // ),

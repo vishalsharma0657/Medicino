@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 
 class InputField extends StatelessWidget {
-  // const InputField({ Key? key }) : super(key: key);
   String txt;
   bool pswd;
-  InputField(this.txt, this.pswd);
+  InputField(this.txt, this.pswd, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
