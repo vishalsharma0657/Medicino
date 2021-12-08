@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:medicino/User_Input/slider.dart';
 import 'package:medicino/User_Input/user_sex.dart';
+import 'package:medicino/Report/output_page.dart';
 
 class InputPage extends StatelessWidget {
   const InputPage({Key? key}) : super(key: key);
@@ -67,7 +68,12 @@ class InputPage extends StatelessWidget {
             ),
           ),
           GestureDetector(
-            onTap: () {},
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const output_page()),
+              );
+            },
             child: Container(
               decoration: const BoxDecoration(
                   color: Colors.amber,
