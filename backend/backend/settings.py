@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'medicino'
 ]
 
 MIDDLEWARE = [
@@ -75,11 +76,16 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'djongo',
+        'CLIENT': {
+            'name': 'medical',
+            'host': 'mongodb+srv://niteshkumar:Nitesh123456@cluster0.k9rnc.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',
+            'username': 'niteshkumar',
+            'password': 'Nitesh123456',
+            'authMechanism': 'SCRAM-SHA-1'
+        }
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
