@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:carousel_pro/carousel_pro.dart';
+import 'package:medicino/Report/custom_widget.dart';
 
 // ignore: camel_case_types
 class output_page extends StatelessWidget {
-  const output_page({Key? key}) : super(key: key);
+  final String txt1;
+  final String txt2;
+  final String imgLink;
+  const output_page(this.txt1, this.txt2, this.imgLink, {Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -13,49 +17,89 @@ class output_page extends StatelessWidget {
         centerTitle: true,
         backgroundColor: Colors.white,
         elevation: 0,
-        leading: const BackButton(
-          color: Colors.blue,
+        leading: BackButton(
+          color: Colors.blue[900],
         ),
-        title: const Text(
+        title: Text(
           'REPORT',
           style: TextStyle(
-            color: Colors.blue,
+            color: Colors.blue[900],
             fontSize: 20,
             fontWeight: FontWeight.w500,
           ),
         ),
       ),
-      body: Center(
-        child: ListView(
-          children: [
-            SizedBox(
-                height: 200,
-                width: double.infinity,
-                child: Carousel(
-                  images: [
-                    Image.asset(
-                      'images/boy_image.png',
-                    ),
-                    Image.asset(
-                      'images/doctor.png',
-                    ),
-                    Image.asset(
-                      'images/facebook_logo.png',
-                    ),
-                    Image.asset(
-                      'images/google_logo.png',
-                    ),
-                  ],
-                  dotSize: 8.0,
-                  dotSpacing: 15.0,
-                  dotColor: Colors.lightGreenAccent,
-                  indicatorBgPadding: 5.0,
-                  dotBgColor: Colors.white.withOpacity(0.1),
-                  borderRadius: true,
-                )),
-          ],
-        ),
+      body: Column(
+        // mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          // Container(
+          //   height: 200,
+          //   child: const CustomWidget(),
+          // ),
+
+          Expanded(
+            flex: 4,
+            child: CustomWidget(txt1, txt2, imgLink),
+          ),
+          Row(
+            // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: const [
+              Expanded(
+                flex: 3,
+                child: Divider(
+                  color: Colors.black,
+                  thickness: 4.0,
+                ),
+              ),
+              Spacer(
+                flex: 1,
+              ),
+              Text(
+                'Some tips',
+                style: TextStyle(
+                    color: Colors.teal,
+                    fontSize: 16.0,
+                    fontWeight: FontWeight.w600),
+              ),
+              Spacer(),
+              Expanded(
+                flex: 3,
+                child: Divider(
+                  color: Colors.black,
+                  thickness: 4.0,
+                ),
+              ),
+            ],
+          ),
+          Expanded(
+            flex: 3,
+            child: ListView.builder(
+                itemCount: 7,
+                itemBuilder: (BuildContext context, int index) {
+                  return ListTile(
+                      leading: const Icon(
+                        Icons.health_and_safety_outlined,
+                        color: Colors.teal,
+                      ),
+                      title: Text(
+                        tips[index],
+                        style: const TextStyle(
+                            fontSize: 17.0, fontWeight: FontWeight.w500),
+                      ));
+                }),
+          ),
+        ],
       ),
     );
   }
 }
+
+List<String> tips = [
+  'Eat nourishing food.',
+  'Sleep seven to eight hours a night.',
+  'Keep company with good people.',
+  'Get regular exercise.',
+  'Limit sugary drinks.',
+  'Stay hydrated.',
+  'Have regular check-ups.'
+];

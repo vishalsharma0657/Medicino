@@ -1,5 +1,9 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:medicino/User_Input/fetching_data.dart';
 import 'package:medicino/User_Input/slider.dart';
+import 'package:medicino/User_Input/symptoms.dart';
 import 'package:medicino/User_Input/user_sex.dart';
 import 'package:medicino/Report/output_page.dart';
 
@@ -25,53 +29,64 @@ class InputPage extends StatelessWidget {
           const Spacer(
             flex: 1,
           ),
-          Expanded(
-            child: Row(
-              // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const [
-                Expanded(
-                  flex: 3,
-                  child: Divider(
-                    color: Colors.black,
-                    thickness: 4.0,
-                  ),
+          Row(
+            // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: const [
+              Expanded(
+                flex: 3,
+                child: Divider(
+                  color: Colors.black,
+                  thickness: 4.0,
                 ),
-                Spacer(
-                  flex: 1,
+              ),
+              Spacer(
+                flex: 1,
+              ),
+              Text('Symptoms'),
+              Spacer(),
+              Expanded(
+                flex: 3,
+                child: Divider(
+                  color: Colors.black,
+                  thickness: 4.0,
                 ),
-                Text('Symptoms'),
-                Spacer(),
-                Expanded(
-                  flex: 3,
-                  child: Divider(
-                    color: Colors.black,
-                    thickness: 4.0,
-                  ),
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
           Expanded(
-            flex: 4,
-            child: SingleChildScrollView(
-              child: Column(
-                children: const [
-                  Symptom('fever'),
-                  Symptom('headache'),
-                  Symptom('lorem'),
-                  Symptom('ipsum'),
-                  Symptom('ipsum'),
-                  Symptom('ipsum'),
-                  Symptom('ipsum'),
-                ],
-              ),
+            flex: 5,
+            child: ListView.builder(
+              itemCount: symp.length,
+              itemBuilder: (BuildContext context, int idx) {
+                return Symptom(symp[idx], idx);
+              },
             ),
           ),
           GestureDetector(
-            onTap: () {
+            onTap: () async {
+              var arr = [];
+              for (int i = 0; i < symp.length; i++) {
+                if (symp[i][0] == 't') {
+                  arr.add(i);
+                }
+              }
+              // print(arr);
+              var content = await fetchMedicine(arr[0]);
+              final valo = jsonDecode(content.body);
+              final String dis = valo['disease'];
+              final String med = valo['medicine'];
+              final String imgLink = valo['images'];
+              // print(content.statusCode);
+              // if (content.statusCode == 200) {
+
+              //   print(valo['id']);
+              //   print();
+              //   print(valo['medicine']);
+              // }
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const output_page()),
+                MaterialPageRoute(
+                    builder: (context) => output_page(dis, med, imgLink)),
               );
             },
             child: Container(
@@ -99,8 +114,9 @@ class InputPage extends StatelessWidget {
 }
 
 class Symptom extends StatefulWidget {
-  final String txt;
-  const Symptom(this.txt, {Key? key}) : super(key: key);
+  String txt;
+  final int idx;
+  Symptom(this.txt, this.idx, {Key? key}) : super(key: key);
 
   @override
   _SymptomState createState() => _SymptomState();
@@ -112,11 +128,14 @@ class _SymptomState extends State<Symptom> {
   Widget build(BuildContext context) {
     return CheckboxListTile(
         controlAffinity: ListTileControlAffinity.leading,
-        title: Text(widget.txt),
+        title: Text(widget.txt.substring(1)),
         value: _value,
         onChanged: (value) {
           setState(() {
             _value = value!;
+            widget.txt =
+                (widget.txt[0] == 'f' ? 't' : 'f') + widget.txt.substring(1);
+            symp[widget.idx] = widget.txt;
           });
         });
   }
