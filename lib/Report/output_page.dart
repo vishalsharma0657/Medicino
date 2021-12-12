@@ -1,13 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:medicino/Report/custom_widget.dart';
+import 'package:medicino/Report/custom_carousel.dart';
+import 'package:medicino/User_Input/fetching_data.dart';
+import 'package:medicino/User_Input/symptoms.dart';
 
 // ignore: camel_case_types
-class output_page extends StatelessWidget {
-  final String txt1;
-  final String txt2;
-  final String imgLink;
-  const output_page(this.txt1, this.txt2, this.imgLink, {Key? key})
-      : super(key: key);
+class output_page extends StatefulWidget {
+  // List<CustomWidget> ls;
+  const output_page({Key? key}) : super(key: key);
+
+  @override
+  State<output_page> createState() => _output_pageState();
+}
+
+class _output_pageState extends State<output_page> {
+  @override
+  void dispose() {
+    super.dispose();
+    dis.clear();
+    med.clear();
+    img.clear();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,19 +42,12 @@ class output_page extends StatelessWidget {
         ),
       ),
       body: Column(
-        // mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          // Container(
-          //   height: 200,
-          //   child: const CustomWidget(),
-          // ),
-
           Expanded(
             flex: 4,
-            child: CustomWidget(txt1, txt2, imgLink),
+            child: CustomCarousel(),
           ),
           Row(
-            // mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: const [
               Expanded(
                 flex: 3,

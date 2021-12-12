@@ -1,11 +1,11 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:medicino/User_Input/fetching_data.dart';
+import 'package:medicino/Report/output_page.dart';
 import 'package:medicino/User_Input/slider.dart';
 import 'package:medicino/User_Input/symptoms.dart';
 import 'package:medicino/User_Input/user_sex.dart';
-import 'package:medicino/Report/output_page.dart';
+import 'loading_screen.dart';
+import 'package:medicino/User_Input/fetching_data.dart';
+import 'dart:convert';
 
 class InputPage extends StatelessWidget {
   const InputPage({Key? key}) : super(key: key);
@@ -30,7 +30,6 @@ class InputPage extends StatelessWidget {
             flex: 1,
           ),
           Row(
-            // mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: const [
               Expanded(
                 flex: 3,
@@ -64,29 +63,26 @@ class InputPage extends StatelessWidget {
           ),
           GestureDetector(
             onTap: () async {
-              var arr = [];
-              for (int i = 0; i < symp.length; i++) {
-                if (symp[i][0] == 't') {
-                  arr.add(i);
-                }
-              }
-              // print(arr);
-              var content = await fetchMedicine(arr[0]);
-              final valo = jsonDecode(content.body);
-              final String dis = valo['disease'];
-              final String med = valo['medicine'];
-              final String imgLink = valo['images'];
-              // print(content.statusCode);
-              // if (content.statusCode == 200) {
-
-              //   print(valo['id']);
-              //   print();
-              //   print(valo['medicine']);
-              // }
               Navigator.push(
                 context,
-                MaterialPageRoute(
-                    builder: (context) => output_page(dis, med, imgLink)),
+                MaterialPageRoute(builder: (context) => const Loading()),
+              );
+              for (int i = 0; i < symp.length; i++) {
+                if (symp[i][0] == 't') {
+                  var content = await fetchMedicine(i + 1);
+                  if (content.statusCode == 200) {
+                    final valo = jsonDecode(content.body);
+                    dis.add(valo['disease']);
+                    med.add(valo['medicine']);
+                    img.add(valo['images']);
+                  }
+                }
+              }
+              Navigator.pushReplacement<void, void>(
+                context,
+                MaterialPageRoute<void>(
+                  builder: (BuildContext context) => const output_page(),
+                ),
               );
             },
             child: Container(

@@ -1,5 +1,6 @@
 // import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 class CustomWidget extends StatelessWidget {
   String txt1 = "";
@@ -16,30 +17,32 @@ class CustomWidget extends StatelessWidget {
     return Column(
       children: [
         Expanded(
-          flex: 6,
-          child: Image.network(
-            imgLink,
-            loadingBuilder: (context, child, loadingProgress) {
-              return loadingProgress == null
-                  ? child
-                  : const LinearProgressIndicator();
+          flex: 3,
+          child: CachedNetworkImage(
+            placeholder: (context, url) => CircularProgressIndicator(),
+            imageUrl: imgLink,
+            errorWidget: (context, url, error) {
+              return Image.network(imgLink);
             },
-            fit: BoxFit.contain,
           ),
         ),
         Expanded(
           child: Column(
             children: [
-              Text(
-                txt1,
-                style: TextStyle(
-                    fontSize: 18.0,
-                    color: Colors.red[900],
-                    fontWeight: FontWeight.w500),
+              Expanded(
+                child: Text(
+                  txt1,
+                  style: TextStyle(
+                      fontSize: 18.0,
+                      color: Colors.red[900],
+                      fontWeight: FontWeight.w500),
+                ),
               ),
-              Text(
-                'Medicine-> $txt2',
-                style: TextStyle(fontSize: 18.0, color: Colors.indigo[900]),
+              Expanded(
+                child: Text(
+                  'Medicine-> $txt2 ',
+                  style: TextStyle(fontSize: 18.0, color: Colors.indigo[900]),
+                ),
               )
             ],
           ),
@@ -48,7 +51,3 @@ class CustomWidget extends StatelessWidget {
     );
   }
 }
-
-// Widget<Image> loadImage(String urll) {
-//   return Image.network(urll);
-// }
