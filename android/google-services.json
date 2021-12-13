@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "696362614832",
+    "firebase_url": "https://medicino-b0f29-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "medicino-b0f29",
+    "storage_bucket": "medicino-b0f29.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:696362614832:android:fbc1e79a229ae5facf6df5",
+        "android_client_info": {
+          "package_name": "com.example.medicino"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "696362614832-qb3jd9c9c44jggrtkog3jm43f0rkf73e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDpqVg3KeTM4BhPuwJY6DAfPA3XF-3RUnE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "696362614832-qb3jd9c9c44jggrtkog3jm43f0rkf73e.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
