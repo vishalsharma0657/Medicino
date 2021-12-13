@@ -9,6 +9,8 @@ import 'package:medicino/User_Input/fetching_data.dart';
 import 'dart:convert';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:medicino/models/authentication.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 
 
 class InputPage extends StatefulWidget {
@@ -89,27 +91,50 @@ class _HomeScreenState extends State<InputPage> {
           ),
           GestureDetector(
             onTap: () async {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const Loading()),
-              );
-              for (int i = 0; i < symp.length; i++) {
-                if (symp[i][0] == 't') {
-                  var content = await fetchMedicine(i + 1);
-                  if (content.statusCode == 200) {
-                    final valo = jsonDecode(content.body);
-                    dis.add(valo['disease']);
-                    med.add(valo['medicine']);
-                    img.add(valo['images']);
+              var connectivityResult =
+                  await (Connectivity().checkConnectivity());
+              if (connectivityResult != ConnectivityResult.mobile &&
+                  connectivityResult != ConnectivityResult.wifi) {
+                Fluttertoast.showToast(
+                    msg: "Please check your internet connection.",
+                    toastLength: Toast.LENGTH_SHORT,
+                    gravity: ToastGravity.CENTER,
+                    timeInSecForIosWeb: 1,
+                    backgroundColor: Colors.red,
+                    textColor: Colors.white,
+                    fontSize: 16.0);
+              } else {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const Loading()),
+                );
+                for (int i = 0; i < symp.length; i++) {
+                  if (symp[i][0] == 't') {
+                    var content = await fetchMedicine(i + 1);
+                    if (content.statusCode == 200) {
+                      final valo = jsonDecode(content.body);
+                      dis.add(valo['disease']);
+                      med.add(valo['medicine']);
+                      img.add(valo['images']);
+                    } else {
+                      Fluttertoast.showToast(
+                          msg: "Sorry, an unexpected error occured.",
+                          toastLength: Toast.LENGTH_SHORT,
+                          gravity: ToastGravity.CENTER,
+                          timeInSecForIosWeb: 1,
+                          backgroundColor: Colors.red,
+                          textColor: Colors.white,
+                          fontSize: 16.0);
+                    }
                   }
                 }
+                Navigator.pushReplacement<void, void>(
+                  context,
+                  MaterialPageRoute<void>(
+                    builder: (BuildContext context) => const output_page(),
+                  ),
+                );
               }
-              Navigator.pushReplacement<void, void>(
-                context,
-                MaterialPageRoute<void>(
-                  builder: (BuildContext context) => const output_page(),
-                ),
-              );
             },
             child: Container(
               decoration: const BoxDecoration(
