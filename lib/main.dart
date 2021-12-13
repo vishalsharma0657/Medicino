@@ -16,19 +16,16 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       title: 'Medicino',
-      // theme: ThemeData.dark(),
-      // theme: ThemeData(
-      //   textTheme: const TextTheme(
-      //     bodyText1: TextStyle(),
-      //     bodyText2: TextStyle(),
-      //   ).apply(
-      //     bodyColor: Colors.white,
-      //     displayColor: Colors.red,
-      //   ),
-      // ),
-
-      debugShowCheckedModeBanner: false,
-      home: Signin(),
+      home: MyHomePage(),
     );
+  }
+}
+
+class MyHomePage extends StatelessWidget {
+  const MyHomePage({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return const Signin();
   }
 }
