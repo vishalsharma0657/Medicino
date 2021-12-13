@@ -1,10 +1,7 @@
 import 'dart:ui';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter/material.dart';
-import 'package:medicino/Authentication/elevated_button.dart';
-import 'package:medicino/Authentication/input_field.dart';
 import 'package:medicino/Authentication/sign_up.dart';
-import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:medicino/User_Input/input_page.dart';
 
@@ -51,8 +48,8 @@ class _LoginScreenState extends State<Signin> {
         },
         textInputAction: TextInputAction.next,
         decoration: InputDecoration(
-          prefixIcon: Icon(Icons.mail),
-          contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+          prefixIcon: const Icon(Icons.mail),
+          contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
           hintText: "Email",
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),

@@ -3,7 +3,7 @@ import 'package:medicino/Report/custom_widget.dart';
 import 'package:medicino/User_Input/fetching_data.dart';
 
 class CustomCarousel extends StatelessWidget {
-  CustomCarousel({Key? key}) : super(key: key);
+  const CustomCarousel({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

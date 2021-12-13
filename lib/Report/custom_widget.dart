@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
+// ignore: must_be_immutable
 class CustomWidget extends StatelessWidget {
   String txt1 = "";
   String txt2 = "";
@@ -19,7 +20,7 @@ class CustomWidget extends StatelessWidget {
         Expanded(
           flex: 3,
           child: CachedNetworkImage(
-            placeholder: (context, url) => CircularProgressIndicator(),
+            placeholder: (context, url) => const CircularProgressIndicator(),
             imageUrl: imgLink,
             errorWidget: (context, url, error) {
               return Image.network(imgLink);

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:medicino/Report/custom_carousel.dart';
 import 'package:medicino/User_Input/fetching_data.dart';
-import 'package:medicino/User_Input/symptoms.dart';
 
 // ignore: camel_case_types
 class output_page extends StatefulWidget {
@@ -12,6 +11,7 @@ class output_page extends StatefulWidget {
   State<output_page> createState() => _output_pageState();
 }
 
+// ignore: camel_case_types
 class _output_pageState extends State<output_page> {
   @override
   void dispose() {
@@ -43,7 +43,7 @@ class _output_pageState extends State<output_page> {
       ),
       body: Column(
         children: [
-          Expanded(
+          const Expanded(
             flex: 4,
             child: CustomCarousel(),
           ),
