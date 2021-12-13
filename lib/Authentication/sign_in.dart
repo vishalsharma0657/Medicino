@@ -118,12 +118,13 @@ class _LoginScreenState extends State<Signin> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
-                    SizedBox(
-                        height: 200,
-                        child: Image.asset(
-                          "images/logo.png",
-                          fit: BoxFit.contain,
-                        )),
+                    const CircleAvatar(
+                      radius: 100,
+                      backgroundImage: AssetImage(
+                        "images/logo.png",
+                        // fit: BoxFit.contain,
+                      ),
+                    ),
                     const SizedBox(height: 45),
                     emailField,
                     const SizedBox(height: 25),
@@ -170,7 +171,7 @@ class _LoginScreenState extends State<Signin> {
             .signInWithEmailAndPassword(email: email, password: password)
             .then((uid) => {
                   Fluttertoast.showToast(msg: "Login Successful"),
-                  Navigator.of(context).pushReplacement(MaterialPageRoute(
+                  Navigator.of(context).push(MaterialPageRoute(
                       builder: (context) => const InputPage())),
                 });
       } on FirebaseAuthException catch (error) {
