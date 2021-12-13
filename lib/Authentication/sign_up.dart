@@ -206,12 +206,12 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
-                    SizedBox(
-                        height: 180,
-                        child: Image.asset(
-                          "images/logo.png",
-                          fit: BoxFit.contain,
-                        )),
+                    const CircleAvatar(
+                      backgroundImage: AssetImage(
+                        "images/logo.png",
+                      ),
+                      radius: 80,
+                    ),
                     const SizedBox(height: 45),
                     firstNameField,
                     const SizedBox(height: 20),
