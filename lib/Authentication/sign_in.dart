@@ -118,7 +118,7 @@ class _LoginScreenState extends State<Signin> {
                     SizedBox(
                         height: 200,
                         child: Image.asset(
-                          "assets/logo.png",
+                          "images/logo.png",
                           fit: BoxFit.contain,
                         )),
                     const SizedBox(height: 45),
@@ -134,7 +134,7 @@ class _LoginScreenState extends State<Signin> {
                           const Text("Don't have an account? "),
                           GestureDetector(
                             onTap: () {
-                              Navigator.push(
+                              Navigator.pushReplacement(
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) =>
