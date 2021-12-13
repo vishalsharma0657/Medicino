@@ -14,10 +14,9 @@ class RegistrationScreen extends StatefulWidget {
 
 class _RegistrationScreenState extends State<RegistrationScreen> {
   final _auth = FirebaseAuth.instance;
-  
+
   // string for displaying the error Message
   String? errorMessage;
-
 
   // our form key
   final _formKey = GlobalKey<FormState>();
@@ -36,7 +35,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
         controller: firstNameEditingController,
         keyboardType: TextInputType.name,
         validator: (value) {
-          RegExp regex = new RegExp(r'^.{3,}$');
+          RegExp regex = RegExp(r'^.{3,}$');
           if (value!.isEmpty) {
             return ("First Name cannot be Empty");
           }
@@ -50,8 +49,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
         },
         textInputAction: TextInputAction.next,
         decoration: InputDecoration(
-          prefixIcon: Icon(Icons.account_circle),
-          contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+          prefixIcon: const Icon(Icons.account_circle),
+          contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
           hintText: "First Name",
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
@@ -235,15 +234,18 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       ),
     );
   }
+
   void signUp(String email, String password) async {
     if (_formKey.currentState!.validate()) {
       try {
         await _auth
             .createUserWithEmailAndPassword(email: email, password: password)
-            .then((value) => {postDetailsToFirestore(),
-            Fluttertoast.showToast(msg: "SignUp Successful"),
+            .then((value) => {
+                  postDetailsToFirestore(),
+                  Fluttertoast.showToast(msg: "SignUp Successful"),
                   Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(builder: (context) =>const Signin())),})
+                      MaterialPageRoute(builder: (context) => const Signin())),
+                })
             .catchError((e) {
           Fluttertoast.showToast(msg: e!.message);
         });
@@ -275,6 +277,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       }
     }
   }
+
   postDetailsToFirestore() async {
     // calling our firestore
     // calling our user model
@@ -302,5 +305,4 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
         MaterialPageRoute(builder: (context) => const Signin()),
         (route) => false);
   }
-  
 }

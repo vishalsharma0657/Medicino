@@ -24,11 +24,10 @@ class _LoginScreenState extends State<Signin> {
 
   // firebase
   final _auth = FirebaseAuth.instance;
-  
+
   // string for displaying the error Message
   String? errorMessage;
- 
-  
+
   @override
   Widget build(BuildContext context) {
     //email field
@@ -138,7 +137,7 @@ class _LoginScreenState extends State<Signin> {
                           const Text("Don't have an account? "),
                           GestureDetector(
                             onTap: () {
-                              Navigator.push(
+                              Navigator.pushReplacement(
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) =>
@@ -171,8 +170,8 @@ class _LoginScreenState extends State<Signin> {
             .signInWithEmailAndPassword(email: email, password: password)
             .then((uid) => {
                   Fluttertoast.showToast(msg: "Login Successful"),
-                  Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(builder: (context) =>const InputPage())),
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(
+                      builder: (context) => const InputPage())),
                 });
       } on FirebaseAuthException catch (error) {
         switch (error.code) {
