@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:medicino/Report/output_page.dart';
 import 'package:medicino/User_Input/slider.dart';
@@ -6,9 +7,34 @@ import 'package:medicino/User_Input/user_sex.dart';
 import 'loading_screen.dart';
 import 'package:medicino/User_Input/fetching_data.dart';
 import 'dart:convert';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:medicino/models/authentication.dart';
 
-class InputPage extends StatelessWidget {
+
+class InputPage extends StatefulWidget {
   const InputPage({Key? key}) : super(key: key);
+
+  @override
+  _HomeScreenState createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<InputPage> {
+
+  User? user = FirebaseAuth.instance.currentUser;
+  UserModel loggedInUser = UserModel();
+
+  @override
+  void initState() {
+    super.initState();
+    FirebaseFirestore.instance
+        .collection("users")
+        .doc(user!.uid)
+        .get()
+        .then((value) {
+      loggedInUser = UserModel.fromMap(value.data());
+      setState(() {});
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -109,6 +135,7 @@ class InputPage extends StatelessWidget {
   }
 }
 
+// ignore: must_be_immutable
 class Symptom extends StatefulWidget {
   String txt;
   final int idx;
