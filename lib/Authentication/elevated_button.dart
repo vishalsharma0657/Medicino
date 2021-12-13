@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:medicino/User_Input/input_page.dart';
 
+// ignore: must_be_immutable
 class Button extends StatelessWidget {
   String txt;
   Button(this.txt, {Key? key}) : super(key: key);

@@ -1,8 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:medicino/Report/output_page.dart';
-import 'package:medicino/User_Input/symptoms.dart';
-import 'package:medicino/User_Input/fetching_data.dart';
-import 'dart:convert';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class Loading extends StatefulWidget {

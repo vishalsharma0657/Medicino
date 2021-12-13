@@ -109,6 +109,7 @@ class InputPage extends StatelessWidget {
   }
 }
 
+// ignore: must_be_immutable
 class Symptom extends StatefulWidget {
   String txt;
   final int idx;
