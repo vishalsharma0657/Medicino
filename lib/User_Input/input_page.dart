@@ -1,17 +1,17 @@
+import 'dart:convert';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:medicino/Report/output_page.dart';
+import 'package:medicino/User_Input/fetching_data.dart';
 import 'package:medicino/User_Input/slider.dart';
 import 'package:medicino/User_Input/symptoms.dart';
 import 'package:medicino/User_Input/user_sex.dart';
-import 'loading_screen.dart';
-import 'package:medicino/User_Input/fetching_data.dart';
-import 'dart:convert';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:medicino/models/authentication.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
-
 
 class InputPage extends StatefulWidget {
   const InputPage({Key? key}) : super(key: key);
@@ -21,10 +21,9 @@ class InputPage extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<InputPage> {
-
   User? user = FirebaseAuth.instance.currentUser;
   UserModel loggedInUser = UserModel();
-
+  bool flag = false;
   @override
   void initState() {
     super.initState();
@@ -35,6 +34,12 @@ class _HomeScreenState extends State<InputPage> {
         .then((value) {
       loggedInUser = UserModel.fromMap(value.data());
       setState(() {});
+    });
+  }
+
+  void deependu(bool val) {
+    setState(() {
+      flag = val;
     });
   }
 
@@ -104,36 +109,7 @@ class _HomeScreenState extends State<InputPage> {
                     textColor: Colors.white,
                     fontSize: 16.0);
               } else {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const Loading()),
-                );
-                for (int i = 0; i < symp.length; i++) {
-                  if (symp[i][0] == 't') {
-                    var content = await fetchMedicine(i + 1);
-                    if (content.statusCode == 200) {
-                      final valo = jsonDecode(content.body);
-                      dis.add(valo['disease']);
-                      med.add(valo['medicine']);
-                      img.add(valo['images']);
-                    } else {
-                      Fluttertoast.showToast(
-                          msg: "Sorry, an unexpected error occured.",
-                          toastLength: Toast.LENGTH_SHORT,
-                          gravity: ToastGravity.CENTER,
-                          timeInSecForIosWeb: 1,
-                          backgroundColor: Colors.red,
-                          textColor: Colors.white,
-                          fontSize: 16.0);
-                    }
-                  }
-                }
-                Navigator.pushReplacement<void, void>(
-                  context,
-                  MaterialPageRoute<void>(
-                    builder: (BuildContext context) => const output_page(),
-                  ),
-                );
+                deependu(true);
               }
             },
             child: Container(
@@ -143,14 +119,8 @@ class _HomeScreenState extends State<InputPage> {
                       topLeft: Radius.circular(14.0),
                       topRight: Radius.circular(14.0))),
               height: 47.0,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
-                  Text(
-                    'NEXT',
-                    style: TextStyle(fontSize: 18.0, color: Colors.black),
-                  )
-                ],
+              child: Center(
+                child: flag ? Helper(deependu) : Txt(),
               ),
             ),
           )
@@ -187,4 +157,68 @@ class _SymptomState extends State<Symptom> {
           });
         });
   }
+}
+
+class Helper extends StatelessWidget {
+  final Function functor;
+  const Helper(this.functor, {Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    func(context, functor);
+    return Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
+      SpinKitFadingCircle(
+        color: Colors.white,
+        size: 30.0,
+      ),
+      Text(
+        'Please wait...',
+        style: TextStyle(
+            fontSize: 18.0, color: Colors.white, fontWeight: FontWeight.bold),
+      )
+    ]);
+  }
+}
+
+class Txt extends StatelessWidget {
+  const Txt({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      'NEXT',
+      style: TextStyle(
+          fontSize: 18.0, color: Colors.white, fontWeight: FontWeight.bold),
+    );
+  }
+}
+
+void func(BuildContext context, Function functor) async {
+  for (int i = 0; i < symp.length; i++) {
+    if (symp[i][0] == 't') {
+      var content = await fetchMedicine(i + 1);
+      if (content.statusCode == 200) {
+        final valo = jsonDecode(content.body);
+        dis.add(valo['disease']);
+        med.add(valo['medicine']);
+        img.add(valo['images']);
+      } else {
+        Fluttertoast.showToast(
+            msg: "Sorry, an unexpected error occured.",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.CENTER,
+            timeInSecForIosWeb: 1,
+            backgroundColor: Colors.red,
+            textColor: Colors.white,
+            fontSize: 16.0);
+      }
+    }
+  }
+  functor(false);
+  Navigator.push<void>(
+    context,
+    MaterialPageRoute<void>(
+      builder: (BuildContext context) => const output_page(),
+    ),
+  );
 }

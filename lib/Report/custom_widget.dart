@@ -3,24 +3,24 @@ import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
 class CustomWidget extends StatelessWidget {
-  String txt1 = "";
-  String txt2 = "";
-  String imgLink = "";
-  CustomWidget(this.txt1, this.txt2, this.imgLink, {Key? key})
+  final String txt1;
+  final String txt2;
+  final String imgLink;
+  const CustomWidget(this.txt1, this.txt2, this.imgLink, {Key? key})
       : super(key: key);
   // CustomWidget({this.txt1, this.txt2, Key? key})
   //     : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    imgLink = 'http://' + imgLink.substring(16);
+    String rimgLink = 'http://' + imgLink.substring(16);
     return Column(
       children: [
         Expanded(
           flex: 3,
           child: CachedNetworkImage(
-            placeholder: (context, url) => CircularProgressIndicator(),
-            imageUrl: imgLink,
+            placeholder: (context, url) => const CircularProgressIndicator(),
+            imageUrl: rimgLink,
             errorWidget: (context, url, error) {
               return Image.network(imgLink);
             },

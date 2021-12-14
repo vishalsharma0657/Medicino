@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:medicino/User_Input/input_page.dart';
 
 class Button extends StatelessWidget {
-  String txt;
-  Button(this.txt, {Key? key}) : super(key: key);
+  final String txt;
+  const Button(this.txt, {Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
